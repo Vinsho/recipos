@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  recipos-backend:
+    build:
+      context: "backend/"
+      dockerfile: "Dockerfile"
+    network_mode: "host"
+
+  recipos-frontend:
+    build:
+      context: "frontend/"
+      dockerfile: "Dockerfile"
+    network_mode: "host"

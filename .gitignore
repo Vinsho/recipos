@@ -1,0 +1,45 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# python
+__pycache__/
+*.py[cod]
+*$py.class
+/frontend/public/images
+*.pyre/
+
+# dependencies
+/frontend/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# next.js
+/frontend/.next/
+/out/
+
+# production
+/build
+/frontend/public/images
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# local env files
+.env*.local
+.env
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts

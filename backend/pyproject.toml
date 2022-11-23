@@ -1,0 +1,47 @@
+[tool.poetry]
+name = "recipos"
+version = "0.0.1"
+description = "Recipos backend"
+authors = ["Vinsho <jakub.vins2@gmail.com>"]
+
+packages = [
+    { include = "src"}
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Flask = "^2.2.2"
+Flask-RESTful = "^0.3.9"
+flask-sqlalchemy = "^3.0.2"
+Flask-Cors = "^3.0.10"
+psycopg2 = "^2.9.5"
+PyJWT = "^2.6.0"
+Flask-HTTPAuth = "^4.7.0"
+python-dotenv = "^0.21.0"
+stringcase = "^1.2.0"
+
+[tool.poetry.dev-dependencies]
+pylint = "^2.15.4"
+pyre-check = "^0.9.16"
+black = "^22.10.0"
+poethepoet = "^0.16.4"
+
+[tool.black]
+line-length = 100
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pylint.messages_control]
+disable = [
+    "missing-docstring",
+    "invalid-name",
+    "too-many-instance-attributes",
+    "too-few-public-methods",
+]
+
+[tool.poe.tasks]
+black = "black src"
+black-check = "black --check src"
+pylint = "pylint src --max-nested-blocks 2 --max-statements 10"
