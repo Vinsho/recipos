@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { NotFoundWarning } from "components/Warnings";
 import { RecipeType } from "components/RecipeDetail";
-import { API } from "config";
 import RecipesFilter from "components/RecipesFilter";
 import RecipeBoxComponent from "components/RecipeBox";
-import styled from "styled-components";
 import { Flex, VStack } from "@chakra-ui/react";
 
 const Recipes = () => {
@@ -18,7 +16,7 @@ const Recipes = () => {
   const fetchRecipes = async () => {
     let recipesJson;
     try {
-      const recipesData = await fetch(`${API}recipes`);
+      const recipesData = await fetch(`${process.env.NEXT_PUBLIC_API}recipes`);
       recipesJson = await recipesData.json();
     } catch (error) {
       recipesJson = null;

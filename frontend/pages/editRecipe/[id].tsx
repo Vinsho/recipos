@@ -2,7 +2,6 @@ import React, { useState, useEffect, FormEvent } from "react";
 import { Heading, Input, VStack, Container, Button } from "@chakra-ui/react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
-import { API } from "config";
 import useAuth from "components/Auth/useAuth";
 import useAPI from "components/API/ApiProvider";
 import { DirectionType } from "components/Directions/DirectionsList";
@@ -58,7 +57,7 @@ const NewRecipeComponent = () => {
       data.append("ingredients", JSON.stringify(ingredients));
       data.append("directions", JSON.stringify(directions));
       axiosInstance
-        .put(`${API}recipes/${router.query.id}`, data)
+        .put(`${process.env.NEXT_PUBLIC_API}recipes/${router.query.id}`, data)
         .then((response) => {
           router.push(`/recipes/${router.query.id}`);
           toast.success("Recipe updated!");

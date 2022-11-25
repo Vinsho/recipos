@@ -1,6 +1,5 @@
 import { Button, Container, Heading, Input, VStack } from "@chakra-ui/react";
 import axios from "axios";
-import { API } from "config";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 
@@ -15,7 +14,7 @@ const SignUpComponent = () => {
       toast.error("Passwords don't match!");
     } else {
       axios
-        .post(`${API}users`, formData)
+        .post(`${process.env.NEXT_PUBLIC_API}users`, formData)
         .then((response) => {
           router.push("/login");
           toast.success("Sign Up was successful!");

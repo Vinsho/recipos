@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import React, { useState, FormEvent } from "react";
 import { Heading, Input, VStack, Container, Button } from "@chakra-ui/react";
 
-import { API } from "config";
 import useAuth from "components/Auth/useAuth";
 import { NotSignedInWarning } from "components/Warnings";
 import Directions from "components/Directions/Directions";
@@ -35,7 +34,7 @@ const NewRecipeComponent = () => {
       data.append("ingredients", JSON.stringify(ingredients));
       data.append("directions", JSON.stringify(directions));
       axiosInstance
-        .post(`${API}recipes`, data)
+        .post(`${process.env.NEXT_PUBLIC_API}recipes`, data)
         .then((response) => {
           router.push("/recipes");
           toast.success("Recipe created!");

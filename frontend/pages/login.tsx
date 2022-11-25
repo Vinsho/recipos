@@ -1,6 +1,5 @@
 import { Button, Container, Heading, Input, VStack } from "@chakra-ui/react";
 import axios from "axios";
-import { API } from "config";
 import { useRouter } from "next/router";
 import useAuth from "components/Auth/useAuth";
 import { toast } from "react-toastify";
@@ -14,7 +13,7 @@ const LoginComponent = () => {
     const formData = new FormData(e.target);
 
     axios
-      .post(`${API}userLogin`, formData)
+      .post(`${process.env.NEXT_PUBLIC_API}userLogin`, formData)
       .then((response) => {
         onLogin(response.data);
         router.push("/recipes");

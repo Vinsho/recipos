@@ -1,5 +1,4 @@
 import { nanoid } from "nanoid";
-import { API } from "../../config";
 import useAuth from "../Auth/useAuth";
 
 const useAPI = () => {
@@ -10,7 +9,7 @@ const useAPI = () => {
     setUserCanEdit: (can: boolean) => void
   ) => {
     axiosInstance
-      .get(`${API}userCanEdit/${recipe_id}`)
+      .get(`${process.env.NEXT_PUBLIC_API}userCanEdit/${recipe_id}`)
       .then((response) => {
         if (response.data.message === true) {
           setUserCanEdit(true);
@@ -23,7 +22,9 @@ const useAPI = () => {
     let availableIngredients;
 
     try {
-      const ingredientsData = await fetch(`${API}ingredients`);
+      const ingredientsData = await fetch(
+        `${process.env.NEXT_PUBLIC_API}ingredients`
+      );
 
       availableIngredients = await ingredientsData.json();
       availableIngredients = availableIngredients.map(
@@ -41,7 +42,9 @@ const useAPI = () => {
   const fetchRecipe = async (recipe_id: String) => {
     let recipeJson;
     try {
-      const recipeData = await fetch(`${API}recipes/${recipe_id}`);
+      const recipeData = await fetch(
+        `${process.env.NEXT_PUBLIC_API}recipes/${recipe_id}`
+      );
       recipeJson = await recipeData.json();
     } catch (error) {
       recipeJson = null;
