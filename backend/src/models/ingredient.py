@@ -16,7 +16,7 @@ class Ingredient(ModelBase):
 
     @name.setter
     def name(self, name: str):
-        self._name = name.capitalize()
+        self._name = name.title()
 
 
 class UnitEnum(str, Enum):
