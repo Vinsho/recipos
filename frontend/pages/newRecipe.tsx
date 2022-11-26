@@ -66,6 +66,7 @@ const NewRecipeComponent = () => {
           <Input
             required
             pt={2}
+            accept="image/png image/jpeg image/jpg"
             type="file"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               e.target.files ? setFile(e.target.files[0]) : null

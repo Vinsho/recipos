@@ -1,14 +1,15 @@
+import json
+import base64
+
 from dataclasses import dataclass
 
-import json
 from enum import Enum
 from typing import List
 
 from sqlalchemy.ext.hybrid import hybrid_property
 
-from base import db
+from base import db, ModelBase
 from models.ingredient import Ingredient, IngredientQuantity
-from models.base import ModelBase
 
 
 @dataclass

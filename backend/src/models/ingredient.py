@@ -1,9 +1,7 @@
 from enum import Enum
 from dataclasses import dataclass
 from sqlalchemy.ext.hybrid import hybrid_property
-from models.base import ModelBase
-
-from base import db
+from base import db, ModelBase
 
 
 @dataclass
@@ -38,4 +36,6 @@ class IngredientQuantity(ModelBase):
     unit = db.Column(db.Enum(UnitEnum, name="unit_enum"))
     amount = db.Column(db.Float)
     recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"))
-    name = db.Column(db.String(128), db.ForeignKey("ingredient.name", ondelete="CASCADE"))
+    name = db.Column(
+        db.String(128), db.ForeignKey("ingredient.name", ondelete="CASCADE")
+    )

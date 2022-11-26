@@ -85,7 +85,7 @@ const RecipeComponent = (recipe: RecipeType) => {
             borderRadius="32px"
             minH="250px"
             minW="250px"
-            src={`/images/${recipe.id}.jpg`}
+            src={`${process.env.NEXT_PUBLIC_API}static/images/${recipe.id}.jpg`}
           />
         </HStack>
 

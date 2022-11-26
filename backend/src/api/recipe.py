@@ -1,12 +1,12 @@
 from flask_restful import Resource
 from flask import jsonify, request
+from utils import save_image
 
 from base import api, db
 from models.recipe import Recipe
 from models.ingredient import Ingredient
 
 from api.auth import auth
-from utils import ROOT_PATH
 
 
 @api.resource("/userCanEdit/<recipe_id>")
@@ -14,7 +14,8 @@ class RecipeResourceCanEdit(Resource):
     @auth.login_required
     def get(self, recipe_id: int):
         return {
-            "message": Recipe.query.get_or_404(recipe_id).user_id == auth.current_user().id
+            "message": Recipe.query.get_or_404(recipe_id).user_id
+            == auth.current_user().id
         }, 200
 
 
@@ -33,9 +34,7 @@ class RecipeResource(Resource):
 
         db.session.commit()
 
-        image = request.files.get("image")
-        if image:
-            image.save(f"{ROOT_PATH}/frontend/public/images/{recipe.id}.jpg")
+        save_image(request.files.get("image"), recipe.id)
 
     def delete(self, recipe_id):
         Recipe.query.filter_by(id=recipe_id).delete()
@@ -57,8 +56,7 @@ class RecipeResourceList(Resource):
         db.session.add(recipe)
         db.session.commit()
 
-        image = request.files["image"]
-        image.save(f"{ROOT_PATH}/frontend/public/images/{recipe.id}.jpg")
+        save_image(request.files["image"], recipe.id)
 
 
 @api.resource("/ingredients")

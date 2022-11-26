@@ -5,8 +5,7 @@ import os
 import jwt
 
 
-from base import db
-from models.base import ModelBase
+from base import db, ModelBase
 
 
 @dataclass
@@ -28,10 +27,14 @@ class User(ModelBase):
 
     def hash_password(self, password: str) -> bytes:
         self.salt = os.urandom(64)
-        return hashlib.pbkdf2_hmac("sha256", password.encode("utf-8"), self.salt, 1000000)
+        return hashlib.pbkdf2_hmac(
+            "sha256", password.encode("utf-8"), self.salt, 1000000
+        )
 
     def check_password(self, password: str) -> bool:
-        hashed = hashlib.pbkdf2_hmac("sha256", password.encode("utf-8"), self.salt, 1000000)
+        hashed = hashlib.pbkdf2_hmac(
+            "sha256", password.encode("utf-8"), self.salt, 1000000
+        )
         return hashed == self.password_hash
 
     def generate_token(self) -> str:
