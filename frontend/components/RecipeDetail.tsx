@@ -26,6 +26,7 @@ export interface RecipeType {
   ingredients: Array<IngredientQuantityType>;
   directions: Array<DirectionType>;
   author_name: string;
+  b64_image: string;
 }
 
 const RecipeComponent = (recipe: RecipeType) => {
@@ -87,7 +88,7 @@ const RecipeComponent = (recipe: RecipeType) => {
             minW="250px"
             maxH="500px"
             maxW="500px"
-            src={`${process.env.NEXT_PUBLIC_API}static/images/${recipe.id}.jpg`}
+            src={`data:image/png;base64,${recipe.b64_image}`}
           />
         </HStack>
 

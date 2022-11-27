@@ -24,7 +24,6 @@ api = Api(app)
 
 
 db = SQLAlchemy(app)
-db.create_all()
 
 
 class ModelBase(db.Model):

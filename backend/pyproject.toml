@@ -20,6 +20,7 @@ Flask-HTTPAuth = "^4.7.0"
 python-dotenv = "^0.21.0"
 stringcase = "^1.2.0"
 alembic = "^1.8.1"
+pillow = "^9.3.0"
 
 [tool.poetry.dev-dependencies]
 pylint = "^2.15.4"

@@ -39,11 +39,13 @@ class Recipe(ModelBase):
     ingredients: list
     directions: list
     type: RecipeTypeEnum
+    b64_image: str
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(256))
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     type = db.Column(db.Enum(RecipeTypeEnum, name="recipe_type_enum"))
+    image = db.Column(db.LargeBinary)
 
     author = db.relationship("User", uselist=False)
     _ingredients = db.relationship("IngredientQuantity", cascade="all, delete-orphan")
@@ -52,6 +54,10 @@ class Recipe(ModelBase):
     @property
     def author_name(self) -> str:
         return self.author.name
+
+    @property
+    def b64_image(self):
+        return base64.b64encode(self.image).decode("ascii")
 
     @hybrid_property
     def directions(self) -> List[RecipeDirection]:

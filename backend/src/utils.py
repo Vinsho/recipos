@@ -1,10 +1,12 @@
-from os.path import join
-from pathlib import Path
-
-ROOT_PATH = Path(__file__).parent
-IMAGES_PATH = join(ROOT_PATH, "static", "images")
+import io
+from PIL import Image
 
 
-def save_image(image, name):
+def resolve_image(image):
     if image:
-        image.save(f"{IMAGES_PATH}/{name}.jpg")
+        image = Image.open(image)
+        image.thumbnail((500, 500), Image.ANTIALIAS)
+
+        img_byte_arr = io.BytesIO()
+        image.save(img_byte_arr, format="PNG")
+        return img_byte_arr.getvalue()

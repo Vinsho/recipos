@@ -19,7 +19,7 @@ const RecipeBoxComponent = ({ recipe }: RecipeBoxProps) => {
       >
         <Image
           alt="Image not found"
-          src={`${process.env.NEXT_PUBLIC_API}static/images/${recipe.id}.jpg`}
+          src={`data:image/png;base64,${recipe.b64_image}`}
           boxSize="100%"
           borderTopRadius="8px"
         />
