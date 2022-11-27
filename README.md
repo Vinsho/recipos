@@ -1,6 +1,13 @@
 # Recipos
 Welcome to recipos, site with recipes without annoying life stories. Hobby project used for learning react.
 
+Site is currently running on free tier here:
+
+https://recipos-frontend.onrender.com/
+
+:warning: After inactivity it takes up to 30 sec to start.
+
+
 # Tech Stack
 <img src="https://1000logos.net/wp-content/uploads/2021/11/Docker-Logo-2013.png" width="128"/>
 
