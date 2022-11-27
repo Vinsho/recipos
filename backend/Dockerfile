@@ -11,6 +11,4 @@ RUN poetry config virtualenvs.create false
 RUN poetry install
 
 WORKDIR /backend/src
-ENTRYPOINT alembic upgrade head
-
-CMD python create_app.py
+ENTRYPOINT ./entry.sh
