@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { GiFireBowl } from "react-icons/gi";
-import { GrEdit } from "react-icons/gr";
+import { GrEdit, GrTrash } from "react-icons/gr";
 import { IngredientQuantityType } from "./Ingredients/IngredientList";
 import { DirectionType } from "./Directions/DirectionsList";
 import { useRouter } from "next/router";
@@ -18,6 +18,7 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
+import { toast } from "react-toastify";
 
 export interface RecipeType {
   id: number;
@@ -30,7 +31,7 @@ export interface RecipeType {
 }
 
 const RecipeComponent = (recipe: RecipeType) => {
-  const { setUserCanEditRecipe } = useAPI();
+  const { setUserCanEditRecipe, deleteRecipe } = useAPI();
   const [userCanEdit, setUserCanEdit] = useState(false);
 
   useEffect(() => {
@@ -41,6 +42,31 @@ const RecipeComponent = (recipe: RecipeType) => {
 
   const ingredients = Array.from(recipe.ingredients);
   const directions = Array.from(recipe.directions);
+
+  const EditComponent = () => {
+    if (userCanEdit) {
+      return (
+        <HStack>
+          <IconButton
+            aria-label="edit-recipe"
+            icon={<GrEdit />}
+            size="m"
+            onClick={() => router.push(`/editRecipe/${recipe.id}`)}
+            boxSize="40px"
+          />
+          <IconButton
+            aria-label="delete-recipe"
+            icon={<GrTrash />}
+            size="m"
+            onClick={() => deleteRecipe(recipe.id)}
+            boxSize="40px"
+            backgroundColor="red.600"
+          />
+        </HStack>
+      );
+    }
+    return null;
+  };
 
   return (
     <Flex justifyContent="center">
@@ -54,15 +80,7 @@ const RecipeComponent = (recipe: RecipeType) => {
       >
         <HStack justify="space-between" mt={4} w="100%">
           <Heading>{recipe.name}</Heading>
-          {userCanEdit ? (
-            <IconButton
-              aria-label="edit-recipe"
-              icon={<GrEdit />}
-              size="m"
-              onClick={() => router.push(`/editRecipe/${recipe.id}`)}
-              boxSize="40px"
-            ></IconButton>
-          ) : null}
+          <EditComponent />
         </HStack>
         <Text pl={4}>
           {recipe.type} by {recipe.author_name}

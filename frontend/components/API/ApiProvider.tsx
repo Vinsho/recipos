@@ -1,8 +1,11 @@
 import { nanoid } from "nanoid";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 import useAuth from "../Auth/useAuth";
 
 const useAPI = () => {
   const { axiosInstance } = useAuth();
+  const router = useRouter();
 
   const setUserCanEditRecipe = (
     recipe_id: String,
@@ -52,10 +55,23 @@ const useAPI = () => {
     return recipeJson;
   };
 
+  const deleteRecipe = async (recipe_id: Number) => {
+    axiosInstance
+      .delete(`${process.env.NEXT_PUBLIC_API}recipes/${recipe_id}`)
+      .then(() => {
+        toast.success("Recipe deleted!");
+        router.push("/recipes");
+      })
+      .catch(() => {
+        toast.error("Unable to delete recipe!");
+      });
+  };
+
   return {
     setUserCanEditRecipe: setUserCanEditRecipe,
     getAvailableIngredients: getAvailableIngredients,
     fetchRecipe: fetchRecipe,
+    deleteRecipe: deleteRecipe,
   };
 };
 

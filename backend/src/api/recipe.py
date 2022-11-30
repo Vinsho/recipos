@@ -38,8 +38,10 @@ class RecipeResource(Resource):
 
         db.session.commit()
 
+    @auth.login_required
     def delete(self, recipe_id):
-        Recipe.query.filter_by(id=recipe_id).delete()
+        recipe = Recipe.query.get(recipe_id)
+        db.session.delete(recipe)
         db.session.commit()
 
 
